@@ -89,16 +89,4 @@
         </xpath>
     </field>
 </record>
-
-<record id="view_order_line_tree_inherit_copy_sku" model="ir.ui.view">
-    <field name="name">sale.order.line.tree.inherit.copy.sku</field>
-    <field name="model">sale.order.line</field>
-    <field name="inherit_id" ref="sale.view_order_line_tree"/>
-    <field name="arch" type="xml">
-        <field name="product_id" position="after">
-            <field name="copy_sku_button" widget="html"/>
-        </field>
-    </field>
-</record>
-
 </odoo>

@@ -57,17 +57,3 @@ class SaleOrder(models.Model):
                 order.picking_hrs = False
                 order.delivery_dias = 0.0
 
-class SaleOrderLine(models.Model):
-    _inherit = 'sale.order.line'
-
-    copy_sku_button = fields.Html(string='Copiar SKU', compute='_compute_copy_sku_button', sanitize=False)
-
-    def _compute_copy_sku_button(self):
-        for line in self:
-            sku = line.product_id.default_code or ''
-            line.copy_sku_button = f"""
-                <span>{sku}</span>
-                <button type='button' class='btn btn-primary btn-copy-sku' data-sku='{sku}'>
-                    <i class='fa fa-copy'></i> Copiar
-                </button>
-            """
