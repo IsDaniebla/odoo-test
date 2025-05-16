@@ -64,7 +64,7 @@ class SaleOrderLine(models.Model):
     amazon_tag_ids = fields.Many2many(
         'amazon.product.tag',
         compute='_compute_amazon_tag_ids',
-        string='Tags Amazon',
+        string='Etiquetas Amazon',
         store=False
     )
     product_image_128 = fields.Image(string="Imagen", compute='_compute_product_image_128', store=False)

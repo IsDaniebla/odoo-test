@@ -155,15 +155,36 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='order_line']/tree" position="replace">
                 <tree editable="bottom" decoration-info="product_id">
-                    <field name="product_image_128" widget="image" options="{'size': [50, 50]}" />
-                    <field name="amazon_tag_ids" widget="many2many_tags" />
                     <field name="product_id" />
-                    <field name="product_uom_qty" />
-                    <field name="qty_delivered" />
-                    <!-- price_unit eliminado -->
-                    <!-- price_subtotal eliminado -->
                     <field name="sku_text" string="SKU" widget="CopyClipboardChar" />
+                    <field name="amazon_tag_ids" widget="many2many_tags" />
+                    <field name="product_image_128" widget="image" options="{'size': [50, 50]}" />
+                    <field name="product_uom_qty" />
+                    <field name="qty_delivered" string="Entregado" />
                 </tree>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_order_form_inherit_remove_payment_fields" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.remove.payment.fields</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='validity_date']" position="replace">
+            </xpath>
+            <xpath expr="//field[@name='payment_term_id']" position="replace">
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_order_form_inherit_hide_date_order" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.hide.date.order</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_order']" position="attributes">
+                <attribute name="invisible">1</attribute>
             </xpath>
         </field>
     </record>
