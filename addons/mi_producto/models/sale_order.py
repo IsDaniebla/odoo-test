@@ -73,3 +73,15 @@ class SaleOrderLine(models.Model):
             }
         }
 
+class AmazonTag(models.Model):
+    _name = 'amazon.product.tag'
+    _description = 'Etiqueta Amazon para Producto'
+
+    name = fields.Char('Nombre', required=True, translate=True)
+    product_id = fields.Many2one('product.template', string='Producto', ondelete='cascade', required=True)
+
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
+
+    amazon_tag_ids = fields.One2many('amazon.product.tag', 'product_id', string='Tags Amazon')
+

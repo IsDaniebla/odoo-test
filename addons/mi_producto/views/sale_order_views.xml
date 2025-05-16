@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
-    
+
     <record id="view_order_tree_inherit_sale_type" model="ir.ui.view">
         <field name="name">sale.order.tree.inherit.sale.type</field>
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="inherit_id" ref="sale.view_order_tree" />
         <field name="arch" type="xml">
             <field name="name" position="after">
-                <field name="sale_type"/>
+                <field name="sale_type" />
             </field>
         </field>
     </record>
     <record id="view_quotation_tree_with_onboarding_inherit_sale_type" model="ir.ui.view">
         <field name="name">sale.quotation.tree.with.onboarding.inherit.sale.type</field>
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding" />
         <field name="arch" type="xml">
             <field name="name" position="after">
-                <field name="sale_type"/>
+                <field name="sale_type" />
             </field>
         </field>
     </record>
     <record id="view_order_form_inherit_editable_name" model="ir.ui.view">
         <field name="name">sale.order.form.inherit.editable.name</field>
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
             <field name="name" position="attributes">
                 <attribute name="readonly">0</attribute>
@@ -35,70 +35,90 @@
     <record id="view_order_form_inherit_partner_simple" model="ir.ui.view">
         <field name="name">sale.order.form.inherit.partner.simple</field>
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
             <field name="partner_id" position="replace">
-                <field name="partner_id"/>
+                <field name="partner_id" />
             </field>
         </field>
     </record>
 
     <record id="view_order_form_inherit_venta_y_checkbox" model="ir.ui.view">
-    <field name="name">sale.order.form.inherit.venta.y.checkbox</field>
-    <field name="model">sale.order</field>
-    <field name="inherit_id" ref="sale.view_order_form"/>
-    <field name="arch" type="xml">
-        <xpath expr="//group[@name='partner_details']/field[@name='partner_id']" position="after">
-            <field name="sale_type" widget="radio"/>
-            <field name="productos_nuevos_con_medidas"/>
-        </xpath>
-    </field>
-</record>
+        <field name="name">sale.order.form.inherit.venta.y.checkbox</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='partner_details']/field[@name='partner_id']"
+                position="after">
+                <field name="sale_type" widget="radio" />
+                <field name="productos_nuevos_con_medidas" />
+            </xpath>
+        </field>
+    </record>
 
-<record id="view_order_form_inherit_plataforma" model="ir.ui.view">
-    <field name="name">sale.order.form.inherit.plataforma</field>
-    <field name="model">sale.order</field>
-    <field name="inherit_id" ref="sale.view_order_form"/>
-    <field name="arch" type="xml">
-        <xpath expr="//group[@name='order_details']" position="inside">
-            <field name="plataforma" widget="selection_badge"/>
-        </xpath>
-    </field>
-</record>
+    <record id="view_order_form_inherit_plataforma" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.plataforma</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='order_details']" position="inside">
+                <field name="plataforma" widget="selection_badge" />
+            </xpath>
+        </field>
+    </record>
 
-<record id="view_order_form_inherit_cuenta" model="ir.ui.view">
-    <field name="name">sale.order.form.inherit.cuenta</field>
-    <field name="model">sale.order</field>
-    <field name="inherit_id" ref="sale.view_order_form"/>
-    <field name="arch" type="xml">
-        <xpath expr="//group[@name='order_details']" position="inside">
-            <field name="cuenta" widget="selection_badge"/>
-        </xpath>
-    </field>
-</record>
-<record id="view_order_form_inherit_fechas_entregas" model="ir.ui.view">
-    <field name="name">sale.order.form.inherit.fechas.entregas</field>
-    <field name="model">sale.order</field>
-    <field name="inherit_id" ref="sale.view_order_form"/>
-    <field name="arch" type="xml">
-        <xpath expr="//group[@name='order_details']" position="inside">
-            <field name="fecha_pedido"/>
-            <field name="fecha_validacion"/>
-            <field name="picking_hrs"/>
-            <field name="delivery_dias"/>
-        </xpath>
-    </field>
-</record>
+    <record id="view_order_form_inherit_cuenta" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.cuenta</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='order_details']" position="inside">
+                <field name="cuenta" widget="selection_badge" />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_order_form_inherit_fechas_entregas" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.fechas.entregas</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='order_details']" position="inside">
+                <field name="fecha_pedido" />
+                <field name="fecha_validacion" />
+                <field name="picking_hrs" />
+                <field name="delivery_dias" />
+            </xpath>
+        </field>
+    </record>
 
-<record id="view_order_form_inherit_copy_sku" model="ir.ui.view">
-    <field name="name">sale.order.form.inherit.copy.sku</field>
-    <field name="model">sale.order</field>
-    <field name="inherit_id" ref="sale.view_order_form"/>
-    <field name="arch" type="xml">
-        <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="after">
-            <button name="action_copy_sku" type="object" string="Copiar SKU" class="btn btn-secondary"/>
-        </xpath>
-    </field>
-</record>
+    <record id="view_order_form_inherit_copy_sku" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.copy.sku</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']"
+                position="after">
+                <button name="action_copy_sku" type="object" string="Copiar SKU"
+                    class="btn btn-secondary" />
+            </xpath>
+        </field>
+    </record>
 
+    <record id="product_template_form_inherit_tags" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.tags</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='categ_id']" position="after">
+                <field name="amazon_tag_ids">
+                    <tree editable="bottom">
+                        <field name="name"/>
+                    </tree>
+                    <form>
+                        <field name="name"/>
+                    </form>
+                </field>
+            </xpath>
+        </field>
+    </record>
 </odoo>
