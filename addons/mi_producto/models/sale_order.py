@@ -57,3 +57,19 @@ class SaleOrder(models.Model):
                 order.picking_hrs = False
                 order.delivery_dias = 0.0
 
+class SaleOrderLine(models.Model):
+    _inherit = 'sale.order.line'
+
+    def action_copy_sku(self):
+        # Aquí puedes poner la lógica que desees, por ejemplo, mostrar un mensaje o copiar el SKU a un campo auxiliar
+        # Odoo no puede copiar al portapapeles del usuario desde el backend, pero puedes usar esto para lógica de servidor
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': 'SKU',
+                'message': f'SKU: {self.product_id.default_code or ""}',
+                'sticky': False,
+            }
+        }
+
