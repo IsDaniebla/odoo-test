@@ -61,11 +61,25 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     sku_text = fields.Char(string="SKU", compute='_compute_sku_text', store=False)
+    amazon_tag_ids = fields.Many2many(
+        'amazon.product.tag',
+        compute='_compute_amazon_tag_ids',
+        string='Tags Amazon',
+        store=False
+    )
 
     @api.depends('product_id')
     def _compute_sku_text(self):
         for line in self:
             line.sku_text = line.product_id.default_code or ''
+
+    @api.depends('product_id.amazon_tag_ids')
+    def _compute_amazon_tag_ids(self):
+        for line in self:
+            if line.product_id and hasattr(line.product_id, 'amazon_tag_ids'):
+                line.amazon_tag_ids = line.product_id.amazon_tag_ids
+            else:
+                line.amazon_tag_ids = [(5, 0, 0)]
 
     def action_copy_sku(self):
         return {
