@@ -60,9 +60,14 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
+    sku_text = fields.Char(string="SKU", compute='_compute_sku_text', store=False)
+
+    @api.depends('product_id')
+    def _compute_sku_text(self):
+        for line in self:
+            line.sku_text = line.product_id.default_code or ''
+
     def action_copy_sku(self):
-        # Aquí puedes poner la lógica que desees, por ejemplo, mostrar un mensaje o copiar el SKU a un campo auxiliar
-        # Odoo no puede copiar al portapapeles del usuario desde el backend, pero puedes usar esto para lógica de servidor
         return {
             'type': 'ir.actions.client',
             'tag': 'display_notification',

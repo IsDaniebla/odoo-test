@@ -91,18 +91,17 @@
         </field>
     </record>
 
-    <record id="view_order_form_inherit_copy_sku" model="ir.ui.view">
-        <field name="name">sale.order.form.inherit.copy.sku</field>
+    <record id="view_order_form_inherit_show_sku_clipboard" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.sku.clipboard</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']"
-                position="after">
-                <button name="action_copy_sku" type="object" string="Copiar SKU"
-                    class="btn btn-secondary" />
+            <xpath expr="//field[@name='order_line']/tree" position="inside">
+                <field name="sku_text" string="SKU" widget="CopyClipboardChar" />
             </xpath>
         </field>
     </record>
+
 
     <record id="product_template_form_inherit_tags" model="ir.ui.view">
         <field name="name">product.template.form.inherit.tags</field>
@@ -112,10 +111,10 @@
             <xpath expr="//field[@name='categ_id']" position="after">
                 <field name="amazon_tag_ids">
                     <tree editable="bottom">
-                        <field name="name"/>
+                        <field name="name" />
                     </tree>
                     <form>
-                        <field name="name"/>
+                        <field name="name" />
                     </form>
                 </field>
             </xpath>
@@ -123,16 +122,17 @@
     </record>
 
     <!--  Amazon Tags Pagina de Etiquetas -->
-    <menuitem id="menu_amazon_tag_root" name="Amazon" sequence="100"/>
-    <menuitem id="menu_amazon_tag" name="Etiquetas Amazon" parent="menu_amazon_tag_root" sequence="10"/>
+    <menuitem id="menu_amazon_tag_root" name="Amazon" sequence="100" />
+    <menuitem id="menu_amazon_tag" name="Etiquetas Amazon" parent="menu_amazon_tag_root"
+        sequence="10" />
 
     <record id="view_amazon_tag_tree" model="ir.ui.view">
         <field name="name">amazon.product.tag.tree</field>
         <field name="model">amazon.product.tag</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name"/>
-                <field name="product_id"/>
+                <field name="name" />
+                <field name="product_id" />
             </tree>
         </field>
     </record>
@@ -142,8 +142,8 @@
         <field name="model">amazon.product.tag</field>
         <field name="arch" type="xml">
             <form>
-                <field name="name"/>
-                <field name="product_id"/>
+                <field name="name" />
+                <field name="product_id" />
             </form>
         </field>
     </record>
@@ -152,8 +152,9 @@
         <field name="name">Etiquetas Amazon</field>
         <field name="res_model">amazon.product.tag</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="view_amazon_tag_tree"/>
+        <field name="view_id" ref="view_amazon_tag_tree" />
     </record>
 
-    <menuitem id="menu_amazon_tag_action" name="Gestionar Etiquetas" parent="menu_amazon_tag" action="action_amazon_tag" sequence="1"/>
+    <menuitem id="menu_amazon_tag_action" name="Gestionar Etiquetas" parent="menu_amazon_tag"
+        action="action_amazon_tag" sequence="1" />
 </odoo>
