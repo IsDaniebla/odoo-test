@@ -7,6 +7,7 @@
     'depends': ['sale'],
     'data': [
         'views/sale_order_views.xml',
+        'views/product_kanban_views.xml',
         'security/ir.model.access.csv',
     ],
     'assets': {
