@@ -121,4 +121,39 @@
             </xpath>
         </field>
     </record>
+
+    <!--  Amazon Tags Pagina de Etiquetas -->
+    <menuitem id="menu_amazon_tag_root" name="Amazon" sequence="100"/>
+    <menuitem id="menu_amazon_tag" name="Etiquetas Amazon" parent="menu_amazon_tag_root" sequence="10"/>
+
+    <record id="view_amazon_tag_tree" model="ir.ui.view">
+        <field name="name">amazon.product.tag.tree</field>
+        <field name="model">amazon.product.tag</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="product_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_amazon_tag_form" model="ir.ui.view">
+        <field name="name">amazon.product.tag.form</field>
+        <field name="model">amazon.product.tag</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="name"/>
+                <field name="product_id"/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_amazon_tag" model="ir.actions.act_window">
+        <field name="name">Etiquetas Amazon</field>
+        <field name="res_model">amazon.product.tag</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_amazon_tag_tree"/>
+    </record>
+
+    <menuitem id="menu_amazon_tag_action" name="Gestionar Etiquetas" parent="menu_amazon_tag" action="action_amazon_tag" sequence="1"/>
 </odoo>
