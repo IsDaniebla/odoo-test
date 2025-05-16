@@ -145,6 +145,16 @@
         </field>
     </record>
 
+    <record id="view_order_form_inherit_remove_subtotal" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.remove.subtotal</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="replace">
+            </xpath>
+        </field>
+    </record>
+
     <!--  Amazon Tags Pagina de Etiquetas -->
     <menuitem id="menu_amazon_tag_root" name="Amazon" sequence="100" />
     <menuitem id="menu_amazon_tag" name="Etiquetas Amazon" parent="menu_amazon_tag_root"
