@@ -67,6 +67,7 @@ class SaleOrderLine(models.Model):
         string='Tags Amazon',
         store=False
     )
+    product_image_128 = fields.Image(string="Imagen", compute='_compute_product_image_128', store=False)
 
     @api.depends('product_id')
     def _compute_sku_text(self):
@@ -80,6 +81,11 @@ class SaleOrderLine(models.Model):
                 line.amazon_tag_ids = line.product_id.amazon_tag_ids
             else:
                 line.amazon_tag_ids = [(5, 0, 0)]
+
+    @api.depends('product_id.image_128')
+    def _compute_product_image_128(self):
+        for line in self:
+            line.product_image_128 = line.product_id.image_128
 
     def action_copy_sku(self):
         return {
