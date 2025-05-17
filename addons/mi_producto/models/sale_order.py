@@ -108,5 +108,20 @@ class AmazonTag(models.Model):
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
+    x_studio_vendido_en_coppel = fields.Selection([
+        ('AG', 'AG'),
+    ], string='Vendido en Coppel',
+       help="Especifica desde donde proviene el producto para Coppel")
+    x_studio_vendido_en_fba = fields.Selection([
+        ('AG', 'AG'),
+        ('FBA', 'FBA'),
+    ], string='Vendido en FBA',
+       help="Especifica desde donde proviene el producto para FBA")
+    x_studio_vendido_en_full = fields.Selection([
+        ('AG', 'AG'),
+        ('FULL', 'FULL'),
+    ], string='Vendido en FULL',
+       help="Especifica desde donde proviene el producto para FULL")
+
     amazon_tag_ids = fields.One2many('amazon.product.tag', 'product_id', string='Tags Amazon')
 

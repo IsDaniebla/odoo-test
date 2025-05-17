@@ -21,6 +21,11 @@ restart-web:
 reload:
 	make update-module
 	make restart-web
+	@powershell.exe -Command "Import-Module BurntToast; New-BurntToastNotification -Text 'Odoo', 'Módulos actualizados exitosamente'" || echo '🔔 Notificación no enviada'
+	@echo -e "\a"
+	@echo "✅ Módulos actualizados"
+
+
 
 # Tarea para actualizar un módulo específico
 update-module:

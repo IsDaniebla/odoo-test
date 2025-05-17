@@ -1,57 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="product_template_kanban_view" model="ir.ui.view">
-        <field name="name">product.template.kanban</field>
+
+
+    <record id="product_template_kanban_view_inherit_category_badge" model="ir.ui.view">
+        <field name="name">product.template.kanban.inherit.category.badge</field>
         <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_kanban_view" />
         <field name="arch" type="xml">
-            <kanban sample="1">
-                <field name="id"/>
-                <field name="product_variant_count"/>
-                <field name="currency_id"/>
-                <field name="activity_state"/>
-                <field name="categ_id"/>
-                <field name="default_code"/>
-                <progressbar field="activity_state" colors="{&quot;planned&quot;: &quot;success&quot;, &quot;today&quot;: &quot;warning&quot;, &quot;overdue&quot;: &quot;danger&quot;}"/>
-                <templates>
-                    <t t-name="kanban-box">
-                        <div class="oe_kanban_card oe_kanban_global_click">
-                            <div class="row">
-                                <div class="col-4">
-                                    <div class="o_kanban_image">
-                                        <img t-att-src="kanban_image('product.template', 'image_128', record.id.raw_value)" alt="Product" class="o_image_64_contain"/>
-                                    </div>
+
+            <xpath expr="//t[@t-name='kanban-box']" position="replace">
+                <t t-name="kanban-box">
+                    <field name="x_studio_vendido_en_coppel" invisible="1" />
+                    <field name="x_studio_vendido_en_fba" invisible="1" />
+                    <field name="x_studio_vendido_en_full" invisible="1" />
+                    <field name="qty_available" invisible="1"/>
+                    <div class="oe_kanban_card oe_kanban_global_click d-flex flex-column h-100">
+                        <div class="row h-100 flex-grow-1">
+                            <div class="col-3 d-flex flex-column pe-0">
+                                <div class="o_kanban_image">
+                                    <img
+                                        t-att-src="kanban_image('product.template', 'image_128', record.id.raw_value)"
+                                        alt="Product" class="o_image_64_contain" />
                                 </div>
-                                <div class="col-8">
-                                    <div class="oe_kanban_details">
-                                        <div class="o_kanban_record_top mb-0">
-                                            <div class="o_kanban_record_headings">
-                                                <strong class="o_kanban_record_title">
-                                                    <field name="name"/>
-                                                </strong>
-                                            </div>
-                                            <field name="priority" widget="priority"/>
-                                        </div>
-                                        <div class="o_kanban_record_subtitle">
-                                            <field name="default_code"/>
-                                        </div>
-                                        <div t-if="record.product_variant_count.value &gt; 1" groups="product.group_product_variant">
-                                            <strong>
-                                                <t t-esc="record.product_variant_count.value"/> Variants
+                                <div class="p-0 mt-2 overflow-hidden">
+                                    <field name="categ_id" widget="badge" />
+                                </div>
+                            </div>
+                            <div class="col-9 ps-1">
+                                <div class="oe_kanban_details">
+                                    <div class="o_kanban_record_top mb-0">
+                                        <div class="o_kanban_record_headings">
+                                            <strong class="o_kanban_record_title">
+                                                <field name="name" />
                                             </strong>
                                         </div>
-                                        <div name="product_lst_price" class="mt-1">
-                                            Price: <field name="list_price" widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}"/>
-                                        </div>
-                                        <div>
-                                            <field name="product_properties" widget="properties"/>
-                                        </div>
+                                        <field name="priority" widget="priority" />
+                                    </div>
+                                    <div class="o_kanban_record_subtitle">
+                                        <field name="default_code" widget="CopyClipboardChar" />
+                                    </div>
+                                    <div name="product_lst_price" class="mt-1"> Costo: <field
+                                            name="standard_price" widget="monetary"
+                                            options="{'currency_field': 'currency_id', 'field_digits': True}" />
+                                    </div>
+                                    <div class="d-flex gap-2 mt-2">
+                                        <t t-if="record.x_studio_vendido_en_coppel.raw_value">
+                                            <div class="px-2 py-1 text-white rounded"
+                                                style="background-color: orange;">
+
+                                                <t
+                                                    t-esc="record.x_studio_vendido_en_coppel.value" />
+                                            </div>
+                                        </t>
+                                        <t t-if="record.x_studio_vendido_en_fba.raw_value">
+                                            <div class="px-2 py-1 text-white rounded"
+                                                style="background-color: #007bff;">
+                                                <t t-esc="record.x_studio_vendido_en_fba.value" />
+                                            </div>
+                                        </t>
+                                        <t t-if="record.x_studio_vendido_en_full.raw_value">
+                                            <div class="px-2 py-1 text-dark rounded"
+                                                style="background-color: #ffc107;">
+
+                                                <t t-esc="record.x_studio_vendido_en_full.value" />
+                                            </div>
+                                        </t>
+                                    </div>
+                                    <div class="mt-1"> Stock AG: 
+                                        <t t-esc="record.qty_available.raw_value" />
+                                        Unidades
+                                    </div>
+                                    <div>
+                                        <field name="product_properties" widget="properties" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </t>
-                </templates>
-            </kanban>
+                    </div>
+                </t>
+            </xpath>
         </field>
     </record>
-</odoo> 
+
+    <record id="product_template_form_inherit_storage_full" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.storage.full</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='categ_id']" position="after">
+                <field name="x_studio_vendido_en_coppel" widget="selection_badge" />
+                <field name="x_studio_vendido_en_fba" widget="selection_badge" />
+                <field name="x_studio_vendido_en_full" widget="selection_badge" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
